@@ -1,0 +1,42 @@
+{
+  "name": "aquice-multicast-server",
+  "version": "1.0.0",
+  "author": {
+    "name": "Oladapo Omonayajo",
+    "email": "o.omonayajo@archax.com"
+  },
+  "private": true,
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "start": "nodemon --exec node --trace-warnings --async-stack-traces -r dotenv/config -r ts-node/register src/index.ts"
+  },
+  "dependencies": {
+    "@archax/ace-lib": "^0.6.14",
+    "@archax/ace-market-data-lib": "^0.3.2",
+    "dotenv": "^8.2.0",
+    "ip": "^1.1.5"
+  },
+  "devDependencies": {
+    "@types/ip": "^1.1.0",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.14.35",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "eslint": "^7.9.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.1",
+    "husky": "^4.3.0",
+    "jest": "^26.4.2",
+    "jest-junit": "^11.1.0",
+    "jira-prepare-commit-msg": "^1.5.2",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.0.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.4.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^3.7.4",
+    "utility-types": "^3.10.0"
+  }
+}
