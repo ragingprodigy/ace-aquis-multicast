@@ -26,10 +26,9 @@ export const tickTableDataAsBuffer = (values: ITickTableData): Buffer => {
   buffer.write(values.name, 7, 10);
   buffer.writeBigInt64LE(values.threshold, 17);
   buffer.writeBigInt64LE(values.threshold, 25);
-  
+
   return buffer;
 };
-
 
 /**
  * Get the tickTableData details as a JS object

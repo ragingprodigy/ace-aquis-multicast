@@ -13,7 +13,11 @@ import {
   TimestampSize,
 } from "@archax/ace-market-data-lib";
 
-import { headerAsBuffer, IMessageHeader, messageLength as headerMessageLength } from "./header";
+import {
+  headerAsBuffer,
+  IMessageHeader,
+  messageLength as headerMessageLength,
+} from "./header";
 import { MessageType } from "./types";
 
 export interface IOrderAdd {
@@ -26,7 +30,13 @@ export interface IOrderAdd {
 }
 
 export const messageType = MessageType.orderAdd;
-const messageLength = InstrumentSize + SideSize + QuantitySize + PriceSize + OrderRefSize + TimestampSize;
+const messageLength =
+  InstrumentSize +
+  SideSize +
+  QuantitySize +
+  PriceSize +
+  OrderRefSize +
+  TimestampSize;
 
 export const orderAddAsBuffer = (
   { orderRef, price, quantity, instrumentId, side, timestamp }: IOrderAdd,
@@ -40,16 +50,16 @@ export const orderAddAsBuffer = (
   let offset = 6;
   buffer.writeUInt16LE(instrumentId, offset);
   offset += InstrumentSize;
-  
+
   buffer.writeUInt8(side, offset);
   offset += SideSize;
-  
+
   buffer.writeUInt32LE(quantity, offset);
   offset += QuantitySize;
-  
+
   buffer.writeBigUInt64LE(price, offset);
   offset += PriceSize;
-  
+
   buffer.writeUInt32LE(orderRef, offset);
   offset += OrderRefSize;
 

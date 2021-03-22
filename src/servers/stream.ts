@@ -12,42 +12,45 @@ const ONE_TICK = 100;
 let tradeRef: NodeJS.Timeout;
 let orderRef: NodeJS.Timeout;
 
-export default async (): Promise<void> => new Promise(resolve => {
-  const socket: Socket = dgram.createSocket("udp4");
+export default async (): Promise<void> =>
+  new Promise((resolve) => {
+    const socket: Socket = dgram.createSocket("udp4");
 
-  socket.on("listening", () => info("server listening", "servers.stream.listening"));
+    socket.on("listening", () =>
+      info("server listening", "servers.stream.listening"),
+    );
 
-  socket.bind(SRC_PORT, () => {
-    socket.setBroadcast(true);
-    socket.setMulticastTTL(128);
+    socket.bind(SRC_PORT, () => {
+      socket.setBroadcast(true);
+      socket.setMulticastTTL(128);
 
-    // Send security definitions and statuses
-    setTimeout(() => {
-      sendSecurityDefinitions(socket);
+      // Send security definitions and statuses
       setTimeout(() => {
-        sendSecurityStatuses(socket);
-      }, ONE_TICK * 2);
-    }, ONE_TICK * 3);
-
-    setTimeout(() => {
-      // Send an Order every 1000ms
-      // Send a Trade every 2500ms
-      setInterval(async () => {
+        sendSecurityDefinitions(socket);
         setTimeout(() => {
-          if (!orderRef && !tradeRef) {
-            // Start Sending Orders and Trades
-            orderRef = setInterval(() => {
-              sendOrders(socket);
-            }, ONE_TICK * 10);
+          sendSecurityStatuses(socket);
+        }, ONE_TICK * 2);
+      }, ONE_TICK * 3);
 
-            tradeRef = setInterval(() => {
-              sendTrades(socket);
-            }, ONE_TICK * 25);
-          }
+      setTimeout(() => {
+        // Send an Order every 1000ms
+        // Send a Trade every 2500ms
+        setInterval(async () => {
+          setTimeout(() => {
+            if (!orderRef && !tradeRef) {
+              // Start Sending Orders and Trades
+              orderRef = setInterval(() => {
+                sendOrders(socket);
+              }, ONE_TICK * 10);
+
+              tradeRef = setInterval(() => {
+                sendTrades(socket);
+              }, ONE_TICK * 25);
+            }
+          }, ONE_TICK);
         }, ONE_TICK);
-      }, ONE_TICK);
-    }, ONE_TICK * 10);
+      }, ONE_TICK * 10);
 
-    resolve();
+      resolve();
+    });
   });
-});

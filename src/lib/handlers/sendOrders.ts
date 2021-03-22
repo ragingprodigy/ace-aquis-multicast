@@ -20,6 +20,6 @@ export default (socket: Socket): void => {
     { sequence: nextSequence() },
   );
 
-  addOrderRef({instrumentId, orderRef});
+  addOrderRef({ instrumentId, orderRef });
   send(socket, message);
 };

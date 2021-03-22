@@ -25,7 +25,8 @@ export const nextTradeRef = (): number => ++tradeRef;
 
 export const addOrderRef = (orderRef: IOrder): number => orders.push(orderRef);
 
-export const registerMessage = ({ sequence, message }: SentMessage): number => sentMessages.push({ message, sequence });
+export const registerMessage = ({ sequence, message }: SentMessage): number =>
+  sentMessages.push({ message, sequence });
 
 export const resetSequence = (): number => {
   sequence = 0;
@@ -41,9 +42,12 @@ export const resetSequence = (): number => {
 export const getOrderRef = (): IOrder | undefined =>
   orders[Math.floor(Math.random() * orders.length)];
 
-export const getTradeType = (): TradeType => [TradeType.mac, TradeType.hiddenOrderBook, TradeType.visibleOrderBook][Math.floor(Math.random() * 3)];
+export const getTradeType = (): TradeType =>
+  [TradeType.mac, TradeType.hiddenOrderBook, TradeType.visibleOrderBook][
+    Math.floor(Math.random() * 3)
+  ];
 
 export const getSnapshotMessages = (endAt: number): Buffer[] => {
-  const lastIndex = sentMessages.findIndex(msg => msg.sequence === endAt + 2);
+  const lastIndex = sentMessages.findIndex((msg) => msg.sequence === endAt + 2);
   return sentMessages.slice(0, lastIndex).map(({ message }) => message);
 };

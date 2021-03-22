@@ -5,7 +5,7 @@ import { nextSequence } from "../../sequencer";
 import send from "./send";
 
 export default (socket: Socket): void => {
-  [3, 4, 5].forEach(instrumentId => {
+  [3, 4, 5].forEach((instrumentId) => {
     const message = securityDefinitionAsBuffer(
       {
         currency: "USD",
@@ -13,11 +13,11 @@ export default (socket: Socket): void => {
         isin: "huew",
         mic: "7236A",
         tickTableId: 2,
-        umtf: "uwyeri"
+        umtf: "uwyeri",
       },
       { sequence: nextSequence() },
     );
-    
+
     send(socket, message);
   });
 };

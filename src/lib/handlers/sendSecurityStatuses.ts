@@ -5,7 +5,7 @@ import { nextSequence } from "../../sequencer";
 import send from "./send";
 
 export default (socket: Socket): void => {
-  [3, 4, 5].forEach(instrumentId => {
+  [3, 4, 5].forEach((instrumentId) => {
     const message = securityStatusAsBuffer(
       {
         instrumentId,

@@ -15,7 +15,11 @@ import {
   TradeTypeSize,
 } from "@archax/ace-market-data-lib";
 
-import { headerAsBuffer, IMessageHeader, messageLength as headerMessageLength } from "./header";
+import {
+  headerAsBuffer,
+  IMessageHeader,
+  messageLength as headerMessageLength,
+} from "./header";
 import { MessageType, TradeOptionsSize } from "./types";
 
 export interface ITrade {
@@ -30,10 +34,27 @@ export interface ITrade {
 }
 
 export const messageType = MessageType.trade;
-const messageLength = InstrumentSize + TradeRefSize + TradeTypeSize + QuantitySize + PriceSize + OrderRefSize + TimestampSize + TradeOptionsSize;
+const messageLength =
+  InstrumentSize +
+  TradeRefSize +
+  TradeTypeSize +
+  QuantitySize +
+  PriceSize +
+  OrderRefSize +
+  TimestampSize +
+  TradeOptionsSize;
 
 export const tradeAsBuffer = (
-  { orderRef, price, quantity, instrumentId, timestamp, tradeType, tradeRef, options, }: ITrade,
+  {
+    orderRef,
+    price,
+    quantity,
+    instrumentId,
+    timestamp,
+    tradeType,
+    tradeRef,
+    options,
+  }: ITrade,
   messageHeader: Partial<IMessageHeader> = {},
 ): Buffer => {
   const buffer = headerAsBuffer(

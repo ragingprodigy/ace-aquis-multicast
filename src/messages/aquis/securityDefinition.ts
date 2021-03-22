@@ -2,10 +2,18 @@ import { Instrument, InstrumentSize } from "@archax/ace-market-data-lib";
 
 import { toString } from "../message";
 import {
-  headerAsBuffer, IMessageHeader,
-  messageLength as headerMessageLength
+  headerAsBuffer,
+  IMessageHeader,
+  messageLength as headerMessageLength,
 } from "./header";
-import { CurrencySize, IsinSize, MessageType, MicSize, TickTableIdSize, UmtfSize } from "./types";
+import {
+  CurrencySize,
+  IsinSize,
+  MessageType,
+  MicSize,
+  TickTableIdSize,
+  UmtfSize,
+} from "./types";
 
 export interface ISecurityDefinition {
   currency: string;
@@ -18,7 +26,12 @@ export interface ISecurityDefinition {
 
 export const messageType = MessageType.securityDefinition;
 export const messageLength =
-  InstrumentSize + CurrencySize + IsinSize + MicSize + TickTableIdSize + UmtfSize;
+  InstrumentSize +
+  CurrencySize +
+  IsinSize +
+  MicSize +
+  TickTableIdSize +
+  UmtfSize;
 
 export const securityDefinitionAsBuffer = (
   { currency, isin, mic, instrumentId, tickTableId, umtf }: ISecurityDefinition,
