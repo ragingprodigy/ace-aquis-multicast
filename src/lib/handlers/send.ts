@@ -21,7 +21,7 @@ export default (socket: Socket, message: Buffer): void => {
     app.port,
     app.multicastAddress,
     () =>
-      info("broadcast sent", `stream.send.${MessageType[messageType]}`, {
+      info("broadcast sent", `send.${MessageType[messageType]}`, {
         aquisBuffer: aquisBuffer.toString("hex"),
         message: message.toString("hex"),
         sequence,

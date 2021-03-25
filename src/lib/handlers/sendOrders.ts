@@ -12,8 +12,9 @@ export default (socket: Socket): void => {
     {
       instrumentId,
       orderRef,
-      price: BigInt(Math.floor(Math.random() * 5000000)),
-      quantity: Math.floor(Math.random() * 1000),
+      // price: BigInt(Math.floor(Math.random() * 5000000)),
+      price: 110n,
+      quantity: Math.ceil(Math.random() * 10),
       side: [Side.buy, Side.sell][Math.random() < 0.5 ? 0 : 1],
       timestamp: BigInt(Date.now()),
     },

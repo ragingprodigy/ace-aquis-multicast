@@ -1,16 +1,19 @@
 import { info } from "@archax/ace-lib/ops/log";
 import dgram, { Socket } from "dgram";
 
+import cancelOrder from "../lib/handlers/cancelOrder";
 import sendOrders from "../lib/handlers/sendOrders";
 import sendSecurityDefinitions from "../lib/handlers/sendSecurityDefinitions";
 import sendSecurityStatuses from "../lib/handlers/sendSecurityStatuses";
-import sendTrades from "../lib/handlers/sendTrades";
+
+// import sendTrades from "../lib/handlers/sendTrades";
 
 const SRC_PORT = 6025;
 const ONE_TICK = 100;
 
 let tradeRef: NodeJS.Timeout;
 let orderRef: NodeJS.Timeout;
+let cancelRef: NodeJS.Timeout;
 
 export default async (): Promise<void> =>
   new Promise((resolve) => {
@@ -37,14 +40,18 @@ export default async (): Promise<void> =>
         // Send a Trade every 2500ms
         setInterval(async () => {
           setTimeout(() => {
-            if (!orderRef && !tradeRef) {
+            if (!orderRef && !cancelRef) {
               // Start Sending Orders and Trades
               orderRef = setInterval(() => {
                 sendOrders(socket);
-              }, ONE_TICK * 10);
+              }, ONE_TICK * 25);
 
-              tradeRef = setInterval(() => {
-                sendTrades(socket);
+              // tradeRef = setInterval(() => {
+              //   sendTrades(socket);
+              // }, ONE_TICK * 25);
+
+              cancelRef = setInterval(() => {
+                cancelOrder(socket);
               }, ONE_TICK * 25);
             }
           }, ONE_TICK);

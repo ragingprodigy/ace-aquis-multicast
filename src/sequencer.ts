@@ -28,6 +28,9 @@ export const addOrderRef = (orderRef: IOrder): number => orders.push(orderRef);
 export const registerMessage = ({ sequence, message }: SentMessage): number =>
   sentMessages.push({ message, sequence });
 
+export const randomOrderRef = (): IOrder =>
+  orders[Math.floor(Math.random() * orders.length)];
+
 export const resetSequence = (): number => {
   sequence = 0;
   tradeRef = 0;
